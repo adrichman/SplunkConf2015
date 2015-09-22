@@ -1,4 +1,4 @@
-[Machine Learning and Analytics](ML\ and\ Analytics.md)
+[Machine Learning and Analytics](http://adrichman.github.io/SplunkConf2015/ML\ and\ Analytics.md)
 
-[Best Practices](Best Practices.md)
+[Best Practices](http://adrichman.github.io/SplunkConf2015/Best Practices.md)
 
