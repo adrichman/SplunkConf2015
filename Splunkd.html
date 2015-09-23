@@ -860,64 +860,40 @@ body .markdown-body
   float: left;
   margin: 0.3em 0 0.25em -1.6em;
   vertical-align: middle;
-}</style><title>Real World Big Data Architecture - Splunk, Hadoop, RDBMS</title></head><body><article class="markdown-body"><h1>
-<a id="user-content-real-world-big-data-architecture---splunk-hadoop-rdbms" class="anchor" href="#real-world-big-data-architecture---splunk-hadoop-rdbms" aria-hidden="true"><span class="octicon octicon-link"></span></a>Real World Big Data Architecture - Splunk, Hadoop, RDBMS</h1>
+}</style><title>Splunkd</title></head><body><article class="markdown-body"><h1>
+<a id="user-content-splunkd" class="anchor" href="#splunkd" aria-hidden="true"><span class="octicon octicon-link"></span></a>Splunkd</h1>
 
 <p><em>from <a href="http://adrichman.github.io/SplunkConf2015/">.conf 2015</a></em></p>
 
-<h2>
-<a id="user-content-hunk" class="anchor" href="#hunk" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hunk</h2>
-
 <ul>
-<li>Hadoop, NoSQL, EMR, S3 as backends to the search head</li>
-<li>Virtual Index - natively handles Map Reduce</li>
-<li>Schema on the fly (Search-time indexing)</li>
-<li>no real-time searches</li>
-<li>report accelerations</li>
+<li>Server -&gt; Logs to Disk -&gt; Forwarder -&gt; Indexes</li>
+<li>Monitor Input -&gt; Queue -&gt; Processors -&gt; Queue -&gt; Indexer</li>
 </ul>
 
 <h2>
-<a id="user-content-alternative-open-source-approach" class="anchor" href="#alternative-open-source-approach" aria-hidden="true"><span class="octicon octicon-link"></span></a>Alternative Open Source Approach</h2>
+<a id="user-content-data-structures" class="anchor" href="#data-structures" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Structures</h2>
 
 <ul>
-<li>hadoop, pig, hive, tez, solr, spark, slider, hbase, phoenix, acccumulo, storm, falcon, atlas, etc...</li>
-<li>cheap storage</li>
-<li>batch distributed processing</li>
-<li>no viz</li>
-<li>no apps</li>
-<li>++coding</li>
-</ul>
-
-<h2>
-<a id="user-content-real-world-customer-architecture-example" class="anchor" href="#real-world-customer-architecture-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Real-World Customer Architecture (Example)</h2>
+<li>Pipelines, processors, queues</li>
+<li>Pipeline Data
 
 <ul>
-<li>Splunk / Hunk / DBConnect on Search Heads</li>
-<li>2000 Forwarders &gt; 25 Indexers</li>
-<li>Historical data (VIX) Flume -&gt; 60 Hortonworks nodes for long-term retention
-
-<ul>
-<li>30 Flume Agents -&gt; 60 Hadoop Nodes </li>
-<li>1.2 PB of storage, stored for 2 yrs</li>
+<li>conf key uniqifies data streams</li>
+<li>boolean flags indicate what forwarders data has passed through</li>
 </ul>
 </li>
-<li>Enrich data (lookup) w/ MySQL (DBConnect)
+<li>Parsing Pipeline (utf8, linebreaker, header)
 
 <ul>
-<li>recommend indexing data from DB in splunk</li>
-<li><code>dbmon-tail</code></li>
-<li><code>dbmon-dump</code></li>
-<li>
-<code>output</code> splunk -&gt; DB</li>
-<li>DBXQuery</li>
+<li>when univeral forwarder, TCP output goes here</li>
+<li>if sourcetype is structured data, the rest of the pipeline will be used</li>
 </ul>
 </li>
-<li>~2TB / day | 250 Users | ~30 Concurrent Users</li>
-<li>Haddop -&gt; Hunk -&gt; Splunk</li>
-<li>A search over history conducts a query of all data storage and combines results</li>
-<li>Can still use other tools (e.g. Spark) and query languages to query the splunk indexed and archived data</li>
-<li>
-<code>indexes.conf</code> defines when data gets archived</li>
-<li>database lookup tables - <code>lookup</code> cmd into database</li>
+<li>Agg Queue</li>
+<li>Merging Pipeline (aggregator)</li>
+<li>Typing Queue</li>
+<li>Typing Pipeline (regex, annotator)</li>
+<li>Index Queue</li>
+<li>Index Pipeline</li>
 </ul>
 </article></body></html>

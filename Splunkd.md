@@ -1,6 +1,6 @@
 # Splunkd
 
-_.conf 2015_
+_from [.conf 2015](http://adrichman.github.io/SplunkConf2015/)_
 
 * Server -> Logs to Disk -> Forwarder -> Indexes
 * Monitor Input -> Queue -> Processors -> Queue -> Indexer

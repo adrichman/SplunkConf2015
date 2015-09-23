@@ -1,5 +1,6 @@
 # Splunk Best Practices
-_from .conf 2015_
+
+_from [.conf 2015](http://adrichman.github.io/SplunkConf2015/)_
 
 ### Have a Local Splunk instance
 

@@ -1,6 +1,6 @@
 # Real World Big Data Architecture - Splunk, Hadoop, RDBMS
 
-_.conf 2015_
+_from [.conf 2015](http://adrichman.github.io/SplunkConf2015/)_
 
 ## Hunk
 

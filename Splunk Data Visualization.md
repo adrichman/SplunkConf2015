@@ -1,6 +1,6 @@
 # Splunk Data Visualization
 
-_from .conf 2015_
+_from [.conf 2015](http://adrichman.github.io/SplunkConf2015/)_
 
 Splunk is good a understanding machine data
 
