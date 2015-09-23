@@ -1,6 +1,6 @@
-[Machine Learning and Analytics](http://adrichman.github.io/SplunkConf2015/ML\ and\ Analytics.md)
+[Machine Learning and Analytics](http://adrichman.github.io/SplunkConf2015/ML\ and\ Analytics.html)
 
-[Best Practices](http://adrichman.github.io/SplunkConf2015/Best Practices.md)
+[Best Practices](http://adrichman.github.io/SplunkConf2015/Best Practices.html)
 
 [Real World Big Data Architecture - Splunk, Hadoop, RDBMS](http://adrichman.github.io/SplunkConf2015/Real\ World\ Big\ Data\ Architecture\ -\ Splunk,\ Hadoop,\ RDBMS.html)
 
