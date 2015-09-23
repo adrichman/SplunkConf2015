@@ -860,5 +860,127 @@ body .markdown-body
   float: left;
   margin: 0.3em 0 0.25em -1.6em;
   vertical-align: middle;
-}</style><title>Splunk Data Visualization</title></head><body><article class="markdown-body"><p> ... | $filter$ | ...</p>
+}</style><title>Splunk Data Visualization</title></head><body><article class="markdown-body"><h1>
+<a id="user-content-splunk-data-visualization" class="anchor" href="#splunk-data-visualization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Splunk Data Visualization</h1>
+
+<p><em>from .conf 2015</em></p>
+
+<p>Splunk is good a understanding machine data</p>
+
+<p>People are good at understanding visualizations</p>
+
+<h2>
+<a id="user-content-basic-visualization" class="anchor" href="#basic-visualization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Visualization:</h2>
+
+<ul>
+<li>Filter</li>
+<li>Format</li>
+<li>Sort</li>
+<li>Transform</li>
+</ul>
+
+<p>Doing Better:</p>
+
+<ul>
+<li>Color</li>
+<li>Shape</li>
+<li>Size</li>
+<li>Knowledge</li>
+</ul>
+
+<p>Even Better:</p>
+
+<ul>
+<li>More knowledge</li>
+<li>Complexity</li>
+<li>Interaction</li>
+</ul>
+
+<p>new Splunk Built-ins:</p>
+
+<ul>
+<li>single value </li>
+<li>maps / chloropleths</li>
+</ul>
+
+<h2>
+<a id="user-content-extending-splunks-capabilities" class="anchor" href="#extending-splunks-capabilities" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extending Splunk's Capabilities</h2>
+
+<ul>
+<li>Splunk Web Framework and JS
+
+<ul>
+<li>Splunk Dashboard Extensions (JS in a panel)</li>
+<li>Standalone Views</li>
+<li>Standalone Splunk Apps</li>
+</ul>
+</li>
+</ul>
+
+<h3>
+<a id="user-content-web-framework" class="anchor" href="#web-framework" aria-hidden="true"><span class="octicon octicon-link"></span></a>Web Framework</h3>
+
+<ul>
+<li><p><em>Search Manager</em> gets data from server and hands it to <em>Simple Splunk View</em></p></li>
+<li><p>Scaffold:</p></li>
+</ul>
+
+<pre><code>    appserver / static
+
+        javascript
+
+    default / ui / views
+
+        xml
+</code></pre>
+
+<h3>
+<a id="user-content-searchmanager" class="anchor" href="#searchmanager" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>SearchManager</code>
+</h3>
+
+<pre><code>id: 'manager'
+
+search: "index=somthing"
+</code></pre>
+
+<h3>
+<a id="user-content-resultsview" class="anchor" href="#resultsview" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>ResultsView</code>
+</h3>
+
+<pre><code>managerId: 'manager'
+
+el: $('blah')
+</code></pre>
+
+<h3>
+<a id="user-content-simplesplunkview" class="anchor" href="#simplesplunkview" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>SimpleSplunkView</code>
+</h3>
+
+<pre><code>createView - for one time view requirements
+
+
+formatData - called before passing data to updateView
+</code></pre>
+
+<h3>
+<a id="user-content-searchbarview" class="anchor" href="#searchbarview" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>SearchBarView</code>
+</h3>
+
+<pre><code>watch for changes in the search bar
+</code></pre>
+
+<p>XML: in <code>&lt;query&gt; ... | $filter$ | ...</code></p>
+
+<p>JS: <code>.setPageToken('filter')</code></p>
+
+<h2>
+<a id="user-content-resources" class="anchor" href="#resources" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resources:</h2>
+
+<ul>
+<li>Developer Guide</li>
+<li>Developer reference app</li>
+<li>Dashboard examples app</li>
+<li>Splunk Web Framework reference</li>
+<li>Splunk Web Framework Toolkit</li>
+</ul>
 </article></body></html>
