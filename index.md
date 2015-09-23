@@ -5,3 +5,5 @@
 [Real World Big Data Architecture - Splunk, Hadoop, RDBMS](http://adrichman.github.io/SplunkConf2015/Real\ World\ Big\ Data\ Architecture\ -\ Splunk,\ Hadoop,\ RDBMS.html)
 
 [Beyond the Lookup Glass](http://adrichman.github.io/SplunkConf2015/Beyond\ the\ Lookup\ Glass.html)
+
+[Splunk Data Visualization](http://adrichman.github.io/SplunkConf2015/Splunk\ Data\ Visualization.html)
