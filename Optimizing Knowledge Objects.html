@@ -860,5 +860,100 @@ body .markdown-body
   float: left;
   margin: 0.3em 0 0.25em -1.6em;
   vertical-align: middle;
-}</style><title>Optimizing Knowledge Objects</title></head><body><article class="markdown-body"><p>Optimizing Knowledge Objects</p>
+}</style><title>Optimizing Knowledge Objects</title></head><body><article class="markdown-body"><h1>
+<a id="user-content-optimizing-knowledge-objects" class="anchor" href="#optimizing-knowledge-objects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optimizing Knowledge Objects</h1>
+
+<p><em>from <a href="http://adrichman.github.io/SplunkConf2015/">.conf 2015</a></em></p>
+
+<h2>
+<a id="user-content-fields" class="anchor" href="#fields" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fields:</h2>
+
+<p>each earch segment expanded on its own without context</p>
+
+<p>props.conf for one sourcetype will radiate into <code>normalizedSearch</code> of sother sourcetypes when field names match</p>
+
+<p>Avoid calculated fields and field aliases entirely where possible</p>
+
+<ul>
+<li>  extract fields using standarized names in the first place</li>
+<li>  some calcculated fields can be replaced with <code>lookups</code>
+</li>
+</ul>
+
+<p>monitor their effects where unavoidable</p>
+
+<h2>
+<a id="user-content-reverse-lookups" class="anchor" href="#reverse-lookups" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reverse Lookups</h2>
+
+<p>Automatic lookups in <code>props.conf</code>: <code>[splunk_web_access]</code></p>
+
+<p>Other sourcetypes' <code>props.conf</code> settings radiate into searches</p>
+
+<h2>
+<a id="user-content-mitigation-strategies" class="anchor" href="#mitigation-strategies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mitigation Strategies</h2>
+
+<ol>
+<li>
+<p>subsearch using inputlookup</p>
+
+<ul>
+<li>removes the per-sourcetype duplication</li>
+<li>lets you choose between reverse lookups and classic behavior</li>
+<li>ignores the configured knowledge per sourcetype</li>
+<li>more effort required to write and maintain searches</li>
+<li>Not eventtype-compatible</li>
+<li>Subsearch overhead</li>
+</ul>
+</li>
+<li><p>Define the per-sourcetype automatic lookup using sourcetype-specific input fields</p></li>
+<li>Define the per-sourcetype automatic lookup using sourcetype-specific output fields 
+<code>LOOKUP-ul = user_location user OUTPUT location AS sourcetye_location</code>
+</li>
+<li>Replace per-sourcetype lookups with broader <code>props.conf</code> stanzas</li>
+<li> <code>[source::*access.log*]</code>
+</li>
+</ol>
+
+<h2>
+<a id="user-content-how-eventtypes-work" class="anchor" href="#how-eventtypes-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>How eventtypes work</h2>
+
+<p>store a search filter or fragments thereof in a resuable box</p>
+
+<p>no pipes, no subsearches</p>
+
+<p>run search and see searchCanBeEventType in Job Inspector</p>
+
+<p>events that match an eventtype have their eventtype field set</p>
+
+<h3>
+<a id="user-content-good-for" class="anchor" href="#good-for" aria-hidden="true"><span class="octicon octicon-link"></span></a>Good for:</h3>
+
+<p>two different systems likely don't log login attempts the same way</p>
+
+<p>define eventtypes for each system, search on eventtypes
+    tag your eventtypes and search ont ags</p>
+
+<h2>
+<a id="user-content-tags-field-value-pairs" class="anchor" href="#tags-field-value-pairs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tags (field-value pairs)</h2>
+
+<p>give a set of field/value pairs a common name </p>
+
+<p>homognenized system-specific values to allow unified searches</p>
+
+<p><code>tags.conf</code></p>
+
+<pre><code>[eventtype=splunk_access]
+application = enabled
+authenticated - enabled
+</code></pre>
+
+<p>avoid long lists of tags mapping to the same field=value
+-- especially with eventtypes and reverse lookups </p>
+
+<h2>
+<a id="user-content-takeaways" class="anchor" href="#takeaways" aria-hidden="true"><span class="octicon octicon-link"></span></a>Takeaways</h2>
+
+<p>Scope knowledge object sharing as narrowly as possible</p>
+
+<p>clean up unused knowledge objects and TAs</p>
 </article></body></html>
