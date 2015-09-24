@@ -6,6 +6,7 @@ Topic | Presentation
 [Beyond the Lookup Glass](http://adrichman.github.io/SplunkConf2015/Beyond\ the\ Lookup\ Glass.html)||
 [Emergent Big Data Streaming Platform in the Cloud](http://adrichman.github.io/SplunkConf2015/Emergent\ Big\ Data\ Streaming\ Platform\ in\ the\ Cloud.html)||
 [Machine Learning and Analytics](http://adrichman.github.io/SplunkConf2015/ML\ and\ Analytics.html) | [presentation](http://adrichman.github.io/SplunkConf2015/presentations/conf2015_Oliner_Splunk_WhatsNew_MachineLearningAndAnalyticsInSplunk.pdf)
+Notes On Optimizing Splunk | [presentation](http://adrichman.github.io/SplunkConf2015/presentations/conf2015_DBitincka_Splunk_Deploying_NotesonOptimizingSplunk.pdf)
 [Optimizing Knowledge Objects](http://adrichman.github.io/SplunkConf2015/Optimizing\ Knowledge\ Objects.html)| [presentation](http://adrichman.github.io/SplunkConf2015/presentations/conf2015_MMueller_Consist_Deploying_OptimizingSplunkKnowledge.pdf)
 [Real World Big Data Architecture - Splunk, Hadoop, RDBMS](http://adrichman.github.io/SplunkConf2015/Real\ World\ Big\ Data\ Architecture\ -\ Splunk,\ Hadoop,\ RDBMS.html)||
 [Recursive Splunking](http://adrichman.github.io/SplunkConf2015/Recursive\ Splunking.html)| [presentation](http://adrichman.github.io/SplunkConf2015/presentations/conf2015_GHrebek_NewYorkAirBrake_UsingSplunkSearchLanguage_RecursiveSplunkingBuildingaData.pdf)
