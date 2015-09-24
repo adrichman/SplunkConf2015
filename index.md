@@ -15,3 +15,5 @@
 [Emergent Big Data Streaming Platform in the Cloud](http://adrichman.github.io/SplunkConf2015/Emergent\ Big\ Data\ Streaming\ Platform\ in\ the\ Cloud.html)
 
 [Search Optimization](http://adrichman.github.io/SplunkConf2015/Search\ Optimization.html)
+
+[Optimizing Knowledge Objects](http://adrichman.github.io/SplunkConf2015/Optimizing\ Knowledge\ Objects.html)
