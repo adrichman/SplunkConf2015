@@ -13,3 +13,5 @@
 [Splunk Data Visualization](http://adrichman.github.io/SplunkConf2015/Splunk\ Data\ Visualization.html)
 
 [Emergent Big Data Streaming Platform in the Cloud](http://adrichman.github.io/SplunkConf2015/Emergent\ Big\ Data\ Streaming\ Platform\ in\ the\ Cloud.html)
+
+[Search Optimization](http://adrichman.github.io/SplunkConf2015/Search\ Optimization.html)

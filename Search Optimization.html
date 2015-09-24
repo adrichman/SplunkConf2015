@@ -860,22 +860,135 @@ body .markdown-body
   float: left;
   margin: 0.3em 0 0.25em -1.6em;
   vertical-align: middle;
-}</style><title>index</title></head><body><article class="markdown-body"><h1>
-<a id="user-content-conf-2015" class="anchor" href="#conf-2015" aria-hidden="true"><span class="octicon octicon-link"></span></a>.conf 2015</h1>
+}</style><title>Search Optimization</title></head><body><article class="markdown-body"><h1>
+<a id="user-content-search-optimization" class="anchor" href="#search-optimization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Search Optimization</h1>
 
-<p><a href="http://adrichman.github.io/SplunkConf2015/ML%20and%20Analytics.html">Machine Learning and Analytics</a></p>
+<p><em>from <a href="http://adrichman.github.io/SplunkConf2015/">.conf 2015</a></em></p>
 
-<p><a href="http://adrichman.github.io/SplunkConf2015/Best%20Practices.html">Best Practices</a></p>
+<h2>
+<a id="user-content-basic-search-best-practices" class="anchor" href="#basic-search-best-practices" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Search Best Practices</h2>
 
-<p><a href="http://adrichman.github.io/SplunkConf2015/Real%20World%20Big%20Data%20Architecture%20-%20Splunk,%20Hadoop,%20RDBMS.html">Real World Big Data Architecture - Splunk, Hadoop, RDBMS</a></p>
+<ul>
+<li>Ensure as much work as possible is distributed (<code>| stats</code>)</li>
+<li>Ensure as little data as possible is moved (limit the time range)
 
-<p><a href="http://adrichman.github.io/SplunkConf2015/Beyond%20the%20Lookup%20Glass.html">Beyond the Lookup Glass</a></p>
+<ul>
+<li>use <code>earliest</code> and <code>latest</code> or  <code>_index_earliest</code> and <code>_index_latest</code>
+</li>
+<li>limit real-time searches</li>
+</ul>
+</li>
+<li>Scope on metadata fields i.e. <code>index</code> ,<code>sourcetype</code>
+</li>
+<li>Use <code>Fast</code>, <code>Smart</code> search modes if possible</li>
+<li>
+<strong>Inclusionary</strong> search terms perform much better than <strong>Exclusionary</strong>
+</li>
+<li>customize fields in <code>fields.conf</code>
+</li>
+</ul>
 
-<p><a href="http://adrichman.github.io/SplunkConf2015/Splunkd.html">Splunkd</a></p>
+<h2>
+<a id="user-content-monitoring-searches" class="anchor" href="#monitoring-searches" aria-hidden="true"><span class="octicon octicon-link"></span></a>Monitoring searches</h2>
 
-<p><a href="http://adrichman.github.io/SplunkConf2015/Splunk%20Data%20Visualization.html">Splunk Data Visualization</a></p>
+<ul>
+<li>DMC</li>
+<li>Job Inspector
 
-<p><a href="http://adrichman.github.io/SplunkConf2015/Emergent%20Big%20Data%20Streaming%20Platform%20in%20the%20Cloud.html">Emergent Big Data Streaming Platform in the Cloud</a></p>
+<ul>
+<li>Completion Time</li>
+<li>Number of Events Scanned</li>
+<li>Search SID</li>
+<li>Timings from the search command
 
-<p><a href="http://adrichman.github.io/SplunkConf2015/Search%20Optimization.html">Search Optimization</a></p>
+<ul>
+<li>Rawdata</li>
+<li>KV</li>
+<li>Lookups</li>
+<li>Typer (Inefficient Eventtypes)</li>
+<li>Alias</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="user-content-field-extraction" class="anchor" href="#field-extraction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Field extraction</h2>
+
+<ul>
+<li>common: duplicate structured fields</li>
+<li>don't want search time and index type parsing</li>
+</ul>
+
+<h2>
+<a id="user-content-regex-optimization" class="anchor" href="#regex-optimization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Regex Optimization</h2>
+
+<ul>
+<li>Backtracking is expensive</li>
+<li>Diagnostic: high <code>kv time</code>
+</li>
+<li>Good Practices:
+
+<ul>
+<li>Prefer <code>+</code> to <code>*</code>
+</li>
+<li>Extract multiple fields together where they appear and are used together</li>
+<li>Simple expressions are usually better (e.g. IP addresses)</li>
+<li>Anchor cleanly <code>^</code> and <code>$</code>
+</li>
+<li>Test and benchmark for accuracy and speed</li>
+</ul>
+</li>
+<li>Benchmark via <code>search.kv</code> in job inspector</li>
+</ul>
+
+<h2>
+<a id="user-content-lookupsbest-practice" class="anchor" href="#lookupsbest-practice" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lookups:Best Practice</h2>
+
+<ul>
+<li>use gzippd csv for large lookups</li>
+<li>auto-lookups for commonly used fields</li>
+<li>scope time-based lookups cleanly</li>
+<li>order lookup table by <code>key</code> first, then <code>values</code>
+</li>
+<li>when building lookups, use <code>inputlookup</code> and <code>stats</code> to combine (particularly useful for tracker type lookups)</li>
+<li>benchmark via <code>search.lookups</code>
+</li>
+</ul>
+
+<h2>
+<a id="user-content-avoid-joins--transactions-when-possible" class="anchor" href="#avoid-joins--transactions-when-possible" aria-hidden="true"><span class="octicon octicon-link"></span></a>Avoid Joins / Transactions when possible</h2>
+
+<ul>
+<li>look at whole pool of data</li>
+<li>use <code>stats</code>:
+
+<ul>
+<li><code>values(field_name)</code></li>
+<li>
+<code>range(_time)</code> works for <strong>duration</strong>
+</li>
+<li>
+<code>dc(sourcetype)</code> for knowing you joined multiple sources</li>
+<li>
+<code>eval</code> nested inside <code>stats</code> expressions</li>
+<li>
+<code>searchmatch</code> for ad-hoc grouping, <code>eventtypes</code> if disciplined
+
+<ul>
+<li>
+<code>range(eval(if(searchmatch("B OR C"), _time, null())) as duration</code> </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="user-content-using-subsearch-effectively" class="anchor" href="#using-subsearch-effectively" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using <code>subsearch</code> effectively</h2>
+
+<ul>
+<li>when something is sparse in the dataset (e.g. rare errors?)</li>
+</ul>
 </article></body></html>
